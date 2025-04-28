@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تعليمي - منصة تعليمية لطلاب 1BAC</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+/* المتغيرات اللونية */
+:root {
+    --primary-color: #4B4237;
+    --secondary-color: #D5A021;
+    --light-color: #EDE7D9;
+    --gray-color: #A49694;
+    --white-color: #ffffff;
+    --dark-color: #333333;
+}
+
+/* إعدادات عامة */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Tajawal', sans-serif;
+    background-color: var(--light-color);
+    color: var(--primary-color);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* الأزرار */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-weight: 500;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 2px solid transparent;
+    font-size: 14px;
+}
+
+.btn-primary {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: transparent;
+    border-color: var(--secondary-color);
+    color: var(--secondary-color);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(213, 160, 33, 0.3);
+}
+
+/* شريط التنقل */
+.navbar {
+    background-color: var(--primary-color);
+    padding: 15px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--light-color);
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.logo i {
+    margin-left: 10px;
+    color: var(--secondary-color);
+    font-size: 22px;
+}
+
+.menu-toggle {
+    background: none;
+    border: none;
+    color: var(--light-color);
+    font-size: 20px;
+    cursor: pointer;
+    display: block;
+}
+
+.nav-links {
+    position: fixed;
+    top: 60px;
+    right: 0;
+    width: 100%;
+    background-color: var(--primary-color);
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+    transform: translateY(-150%);
+    transition: transform 0.4s ease;
+    z-index: 999;
+}
+
+.nav-links.active {
+    transform: translateY(0);
+}
+
+.nav-links li {
+    width: 100%;
+    text-align: center;
+}
+
+.nav-links li a {
+    display: block;
+    color: var(--light-color);
+    text-decoration: none;
+    padding: 15px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.nav-links li a:hover {
+    background-color: rgba(213, 160, 33, 0.2);
+    color: var(--secondary-color);
+}
+
+/* القسم الرئيسي */
+.hero {
+    padding: 120px 0 60px;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--dark-color) 100%);
+    color: var(--light-color);
+    text-align: center;
+}
+
+.hero-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    line-height: 1.3;
+}
+
+.hero-title span {
+    color: var(--secondary-color);
+}
+
+.hero-subtitle {
+    font-size: 16px;
+    margin-bottom: 25px;
+    opacity: 0.9;
+}
+
+.hero-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.hero-image {
+    margin-top: 30px;
+}
+
+.hero-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+/* قسم المواد الدراسية */
+.courses {
+    padding: 60px 0;
+}
+
+.section-title {
+    font-size: 26px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 15px;
+    color: var(--primary-color);
+}
+
+.section-subtitle {
+    text-align: center;
+    font-size: 14px;
+    color: var(--gray-color);
+    margin-bottom: 30px;
+}
+
+.courses-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.course-card {
+    background-color: var(--white-color);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.course-icon {
+    width: 70px;
+    height: 70px;
+    background-color: rgba(213, 160, 33, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px;
+    color: var(--secondary-color);
+    font-size: 25px;
+}
+
+.course-card h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.course-card p {
+    color: var(--gray-color);
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+/* عداد الزوار */
+.visitor-counter {
+    text-align: center;
+    margin: 30px 0;
+    padding: 15px;
+    background-color: var(--white-color);
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.visitor-counter p {
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+/* تذييل الصفحة */
+.footer {
+    background-color: var(--primary-color);
+    color: var(--light-color);
+    padding: 40px 0 20px;
+    text-align: center;
+}
+
+.footer p {
+    margin-bottom: 20px;
+    opacity: 0.8;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.footer-links a {
+    color: var(--light-color);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--secondary-color);
+}
+
+.footer-bottom {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 14px;
+    opacity: 0.7;
+}
+
+/* تأثيرات الحركة */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* تحسينات للشاشات الصغيرة جدًا */
+@media (max-width: 400px) {
+    .hero-title {
+        font-size: 24px;
+    }
+    
+    .hero-subtitle {
+        font-size: 14px;
+    }
+    
+    .section-title {
+        font-size: 22px;
+    }
+}
+</style>
+</head>
+<body>
+    <!-- شريط التنقل -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="logo">
+                <i class="fas fa-book-open"></i>
+                <span>تعليمي</span>
+            </a>
+            <button class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links">
+                <li><a href="#home">الرئيسية</a></li>
+                <li><a href="#courses">الدروس</a></li>
+                <li><a href="#features">المميزات</a></li>
+                <li><a href="#about">عن المنصة</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- القسم الرئيسي -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">منصة تعليمية متكاملة لطلاب <span>1BAC</span></h1>
+                <p class="hero-subtitle">دروس مفصلة، تمارين تفاعلية، واختبارات تقييمية في مواد الاجتماعيات، التربية الإسلامية، العربية والفرنسية</p>
+                <div class="hero-buttons">
+                    <a href="#courses" class="btn btn-primary">استكشف الدروس</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://via.placeholder.com/300x250/EDE7D9/A49694?text=تعليمي" alt="منصة تعليمية">
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم المواد الدراسية -->
+    <section id="courses" class="courses">
+        <div class="container">
+            <h2 class="section-title">المواد الدراسية</h2>
+            <p class="section-subtitle">اختر المادة التي تريد دراستها</p>
+            
+            <div class="courses-grid">
+                <!-- مادة الاجتماعيات -->
+                <div class="course-card">
+                    <div class="course-icon">
+                        <i class="fas fa-globe-africa"></i>
+                    </div>
+                    <h3>الاجتماعيات</h3>
+                    <p>دروس في التاريخ والجغرافيا مع تحليل الأحداث والخرائط التفاعلية</p>
+                </div>
+                
+                <!-- مادة التربية الإسلامية -->
+                <div class="course-card">
+                    <div class="course-icon">
+                        <i class="fas fa-mosque"></i>
+                    </div>
+                    <h3>التربية الإسلامية</h3>
+                    <p>تفسير الآيات، دراسة الأحاديث، وأسس العقيدة الإسلامية</p>
+                </div>
+                
+                <!-- مادة العربية -->
+                <div class="course-card">
+                    <div class="course-icon">
+                        <i class="fas fa-book-quran"></i>
+                    </div>
+                    <h3>اللغة العربية</h3>
+                    <p>قواعد اللغة، النصوص الأدبية، والتعبير الكتابي</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- عداد الزوار -->
+    <div class="container">
+        <div class="visitor-counter">
+            <p>👀 عدد الزوار:</p>
+            <img src="https://visitor-badge.glitch.me/badge?page_id=cluabset.education-.kl" alt="Visitor Count">
+        </div>
+    </div>
+
+    <!-- تذييل الصفحة -->
+    <footer class="footer">
+        <div class="container">
+            <p>منصة تعليمية متكاملة لطلاب السنة الأولى باكالوريا</p>
+            <div class="footer-links">
+                <a href="#home">الرئيسية</a>
+                <a href="#courses">الدروس</a>
+                <a href="#features">المميزات</a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 تعليمي. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // قائمة الهاتف المتحرك
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        
+        menuToggle.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            this.querySelector('i').classList.toggle('fa-times');
+            this.querySelector('i').classList.toggle('fa-bars');
+        });
+        
+        // إغلاق القائمة عند النقر على رابط
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function() {
+                navLinks.classList.remove('active');
+                menuToggle.querySelector('i').classList.remove('fa-times');
+                menuToggle.querySelector('i').classList.add('fa-bars');
+            });
+        });
+    });
+    </script>
+</body>
+</html>
